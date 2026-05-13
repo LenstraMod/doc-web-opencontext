@@ -173,7 +173,7 @@ export default function HomePage() {
               <span className="ml-3 text-xs" style={{ color: 'var(--text-muted)' }}>opencontext — bash</span>
             </div>
             <div className="p-6 text-left font-mono text-sm" style={{ color: 'var(--text-secondary)' }}>
-              <p><span style={{ color: '#28c840' }}>$</span> <span style={{ color: 'var(--text-primary)' }}>opencontext init</span></p>
+              <p><span style={{ color: '#28c840' }}>$</span> <span style={{ color: 'var(--text-primary)' }}>Check Github for Documentation</span></p>
               <p className="mt-2" style={{ color: 'var(--text-muted)' }}>✔ Analyzing repository structure...</p>
               <p style={{ color: 'var(--text-muted)' }}>✔ Syncing Jira context (12 tickets found)</p>
               <p style={{ color: 'var(--text-muted)' }}>✔ Generating AI agent instructions...</p>
