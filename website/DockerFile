@@ -1,0 +1,38 @@
+# 1. Choose the base image (The OS and Node.js version)
+FROM node:18-alpine AS base
+
+# 2. Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
+# Copy package files to install libraries
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# 3. Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+# Copy all your project files from the 'website' folder
+COPY . .
+# Disable telemetry for faster builds
+ENV NEXT_TELEMETRY_DISABLED 1
+RUN npm run build
+
+# 4. Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Copy only the necessary files to keep the container small
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+# Tell the container to listen on port 3000
+EXPOSE 3000
+ENV PORT 3000
+
+# The command to start your web server
+CMD ["npm", "start"]

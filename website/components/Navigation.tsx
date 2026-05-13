@@ -71,7 +71,7 @@ export default function Navigation() {
         {/* CTA Button */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://github.com/fadhilr2/Refactory_Hackathon_SE4802"
+            href="https://github.com/fadhilr2/opencontext"
             id="nav-github-cta"
             target="_blank"
             rel="noopener noreferrer"
